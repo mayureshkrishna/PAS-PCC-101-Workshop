@@ -7,7 +7,7 @@
 . Set the API target for the CLI: (set appropriate end point for your environment)
 +
 ----
-$ cf api https://api.devcloudwest.inbcu.com --skip-ssl-validation
+$ cf api https://api.run.pcfbeta.io --skip-ssl-validation
 ----
 
 . Login to Pivotal Cloudfoundry:
@@ -147,16 +147,4 @@ Note the application name for next steps
 +
 ----
 $ cf app workshop
-----
-
-. Stop the deployed application using the CLI
-+
-----
-$ cf stop workshop
-----
-
-. Delete the deployed application using the CLI
-+
-----
-$ cf delete workshop
 ----
