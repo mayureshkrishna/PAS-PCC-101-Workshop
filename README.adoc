@@ -2,7 +2,7 @@
 
 == Schedule
 
-This one day hands-on classroom style session will provide developers (and operators) with hands on experience with Pivotal Cloud Foundry concepts, architecture and fundamentals of pushing code and building applications. The session includes presentations, demos and hands on labs
+This one day hands-on classroom style session will provide developers with hands on experience with Pivotal Cloud Foundry concepts, architecture and fundamentals of pushing code and building applications. The session includes presentations, demos and hands on labs
 
 9:00 AM - 9:30 AM::
  * Session 1: _PCF 2.2 Overview for App Dev_ 
@@ -26,12 +26,6 @@ This one day hands-on classroom style session will provide developers (and opera
 4:00 PM - 4:15 PM:: Wrap Up
 
 == Course Materials
-
-* Session 1: link:https://docs.google.com/presentation/d/1nCPgNZBuArUOqF1wG-3Qnu8EUHxxj_QgC8poJzp7NeI/edit?usp=sharing[PCF 2.2 Overview for App Dev]
-* Session 2.1: link:https://docs.google.com/presentation/d/1PUbhTVd3LqBOw6gyn1Tg5qdHz7ETPvlVu6QQ9LMQDyY/edit?usp=sharing[PCF 2.2 Services]
-* Session 2.2: link:https://docs.google.com/presentation/d/121lSLz7kNqhYuuB2PKvMbQTfnnuSI2ZJwNpaw9nrzKk/edit?usp=sharing[PCC - Pivotal Cloud Cache]
-* Session 3: link:https://docs.google.com/presentation/d/18XL3GwXjeBdAQVTyHt4Ft57uspcQ_n-N0EoJUNRTjFY/edit?usp=sharing[PCF 2.2 - Security]
-
 
 * Developer Workshop
 ** link:labs/lab1/lab.adoc[Lab 1 - From Zero to Pushing Your First Application]

@@ -11,7 +11,6 @@ For a database this could mean creating/deleting a schema in an existing multite
 Bind/Unbind:: These operations create or delete unique credential sets for an existing service instance that can then be injected into the environment of an application instance.
 --
 +
-+
 image::look_aside.png[]
 +
 == SECTION 1: The Services Marketplace
@@ -69,6 +68,23 @@ cf create-service-key workshop-pcc devkey
 
 ----
 cf service-key workshop-pcc devkey
+----
+
+This will return info about the cluster login.
+
+----
+ "urls": {
+  "gfsh": "https://cloudcache-ca3ab6cf-53ea-4495-8f8f-57a201c32257.cf.*******.net/gemfire/v1",
+  "pulse": "https://cloudcache-ca3ab6cf-53ea-4495-8f8f-57a201c32257.cf.*******.net/pulse"
+ },
+ "users": [
+  {
+   "password": "*********",
+   "roles": [
+    "cluster_operator"
+   ],
+   "username": "cluster_operator_*********"
+  }
 ----
 
 ===== Step 4: Login into to PCC cli (GFSH)
@@ -132,13 +148,17 @@ cf start pizza-store-pcc-client
 
 === Setup the database
 
-http://pizza-store-pcc-client.xyz.numerounocloud.com/loaddb?amount=100
+Let's load the db using /load endpoint. Make sure to use your route URL
+
+http://pizza-store-pcc-client.xyz.pivotal.io/loaddb?amount=100
 
 ----
 New customers successfully saved into Database
 ----
 
-http://pizza-store-pcc-client.xyz.numerounocloud.com/showdb
+Let's fetch top 10 customers using /showdb endpoint. Make sure to use your route URL
+
+http://pizza-store-pcc-client.xyz.pivotal.io/showdb
 
 ----
 First 10 customers are show here: 
@@ -151,7 +171,9 @@ Customer [id=2mDAi0qRr, name=Gianna Merritt, email=merritt@yahoo.com, address=25
 
 === Pizza Store APIs
 
-http://pizza-store-pcc-client.xyz.numerounocloud.com/pizzas
+Lets look at the APIs available for our pizza store app using /pizzas endpoint.
+
+http://pizza-store-pcc-client.xyz.pivotal.io/pizzas
 
 ----
 Lets Order Some Pizza 
@@ -163,11 +185,15 @@ GET /orders?email={emailId} - get specific value
 
 ----
 
-http://pizza-store-pcc-client.xyz.numerounocloud.com/orderPizza?email=lucynorton@gmail.com&type=fancy
+Now we can order some pizza by invoking /orderPizza endpoint. Make sure to use your route URL and pick an email address from data returned by /showdb endpoint.
+
+http://pizza-store-pcc-client.xyz.pivotal.io/orderPizza?email=fischer@mail.com&type=fancy
 
 ==== Result
 
 Cache Miss Scenario
+
+When you call that endpoint for the first time. Cache is missed and data is pulled from DB.
 
 ----
 Result [Pizza{name='fancy', toppings=[arugula, chicken], sauce='pesto', Customer='Customer [id=05eKpgOFA, name=Lucy Norton, email=lucynorton@gmail.com, address=48665 Washington, birthday=1965-02-10T06:20:27.828Z]'}] 
@@ -178,9 +204,38 @@ Elapsed Time [234 ms]
 
 Data Returned From Cache 
 
+Invoke that endpoint again, and this time data will be pulled from Cache and it will return much faster.
+
+http://pizza-store-pcc-client.xyz.pivotal.io/orderPizza?email=fischer@mail.com&type=fancy
+
+
 ----
 Result [Pizza{name='fancy', toppings=[arugula, chicken], sauce='pesto', Customer='Customer [id=05eKpgOFA, name=Lucy Norton, email=lucynorton@gmail.com, address=48665 Washington, birthday=1965-02-10T06:20:27.828Z]'}] 
 Cache Miss for Customer [false] 
 Read from [PCC] 
 Elapsed Time [2 ms]
+----
+
+==== Order Status
+
+We can look at the order status using /orders endpoint.
+
+But first, lets create an index in our cache, by going to gfsh cli.
+
+----
+create index --name=CustomerEmailIndex --region="/pizza_orders o" --expression="o.customerInfo.email"
+----
+
+If you look at the code under io.pivotal.data.repo.PizzaOrderRepo, we are using the index with our query.
+
+Now lets fetch the order status
+
+http://pizza-store-pcc-client.xyz.pivotal.io/orders?email=nathan.mendez@mail.com
+
+It will use the index and fetch data from Cache
+
+----
+Result [Pizza{name='plain', toppings=[cheese], sauce='red', Customer='Customer [id=2gOSU3V2O, name=Nathan Mendez, email=nathan.mendez@mail.com, address=91105 New York, birthday=1955-07-16T01:13:31.733Z]'}
+] 
+Elapsed Time [24 ms]
 ----
