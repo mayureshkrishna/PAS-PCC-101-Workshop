@@ -10,18 +10,18 @@ Create/Delete:: These operations create or delete instances of a service.
 For a database this could mean creating/deleting a schema in an existing multitenant cluster or creating/deleting a dedicated database cluster.
 Bind/Unbind:: These operations create or delete unique credential sets for an existing service instance that can then be injected into the environment of an application instance.
 --
-+
+
 image::look_aside.png[]
-+
+
 == SECTION 1: The Services Marketplace
 
 There are two ways to discover what services are available on Pivotal Cloudfoundry.
 The first is available on any instance of Cloud Foundry: the CLI. Just type:
-+
+
 ----
 $ cf marketplace
 ----
-+
+
 and you'll get a list of services, their available plans, and descriptions. On Pivotal Cloudfoundry, the ``free'' tier of plans is normally the first one listed.
 
 The second way is specific to Pivotal Cloudfoundry's Apps Manager UI.
@@ -126,11 +126,11 @@ applications:
 This will app will be deployed with the name pizza-store-pcc-client using target/pizza-store-pcc-client-0.0.1-SNAPSHOT.jar and a random route url.
 
 Let's deploy without starting the app.
-+
+
 ----
 cf push --no-start
 ----
-+
+
 === Bind the services to the Pizza Store App
 
 ----
