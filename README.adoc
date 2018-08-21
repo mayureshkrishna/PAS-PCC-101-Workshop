@@ -1,0 +1,42 @@
+= Pivotal Cloud Foundry 101 Workshop
+
+== Schedule
+
+This one day hands-on classroom style session will provide developers (and operators) with hands on experience with Pivotal Cloud Foundry concepts, architecture and fundamentals of pushing code and building applications. The session includes presentations, demos and hands on labs
+
+9:00 AM - 9:30 AM::
+ * Session 1: _PCF 2.2 Overview for App Dev_ 
+9:30 AM - 10:30 AM::
+ * Demo: Pushing your first app, Apps Manager_
+10:30 AM - 10:45 AM:: Break
+10:45 AM - 11:30 AM:: 
+* Session 2: _Pivotal Cloud Foundry Services_
+* Session 2: _Pivotal Cloud Cache_
+11:30 AM - 12:30 PM:: Lunch Break
+12:30 PM - 2:45 PM:: 
+* Labs - Push, Scale, Bind, Monitor and Integrate your app
+2:45 PM - 3:00 PM:: Break
+3:00 PM - 3:30 PM:: 
+* Session 3: _Pivotal Cloud Foundry Security_
+3:30 PM - 4:00 PM:: Demo - Spring Boot with Camel and Spring XML DSL on Pivotal Cloud Foundry
+
+
+== Course Materials
+
+* Session 1: link:https://docs.google.com/presentation/d/1nCPgNZBuArUOqF1wG-3Qnu8EUHxxj_QgC8poJzp7NeI/edit?usp=sharing[PCF 2.2 Overview for App Dev]
+* Session 2.1: link:https://docs.google.com/presentation/d/1PUbhTVd3LqBOw6gyn1Tg5qdHz7ETPvlVu6QQ9LMQDyY/edit?usp=sharing[PCF 2.2 Services]
+* Session 2.2: link:https://docs.google.com/presentation/d/121lSLz7kNqhYuuB2PKvMbQTfnnuSI2ZJwNpaw9nrzKk/edit?usp=sharing[PCC - Pivotal Cloud Cache]
+* Session 3: link:presentations/https://docs.google.com/presentation/d/18XL3GwXjeBdAQVTyHt4Ft57uspcQ_n-N0EoJUNRTjFY/edit?usp=sharing[PCF 2.2 - Security]
+
+
+* Developer Workshop
+** Lab 1 - From Zero to Pushing Your First Application
+*** link:labs/lab1/lab.adoc[**Java** Application]
+*** link:labs/lab1/lab-ruby.adoc[**Ruby** Application]
+*** link:labs/lab1/lab-node.adoc[**NodeJS** Application]
+** link:labs/lab2/lab.adoc[Lab 2 - Binding to Cloud Foundry Services]
+** link:labs/lab3/lab.adoc[Lab 3 - Operating Your Application]
+** link:labs/lab4/lab.adoc[Lab 4 - Monitoring Your Application]
+** link:labs/lab5/lab.adoc[Advanced Lab - Deploying a .NET Application]
+** link:cf-spring-trader/README.md[Advanced Lab - Spring Cloud Services, _**Java** Only_]
+** link:labs/lab5/continuous-delivery-lab.adoc[Advanced Lab - Jenkins Integration]
