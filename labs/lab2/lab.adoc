@@ -12,9 +12,10 @@ Bind/Unbind:: These operations create or delete unique credential sets for an ex
 --
 
 
+
 image::look_aside.png[]
 
-== The Services Marketplace
+== SECTION 1: The Services Marketplace
 
 There are two ways to discover what services are available on Pivotal Cloudfoundry.
 The first is available on any instance of Cloud Foundry: the CLI. Just type:
@@ -28,72 +29,153 @@ and you'll get a list of services, their available plans, and descriptions. On P
 The second way is specific to Pivotal Cloudfoundry's Apps Manager UI.
 If you haven't already, login to it by visiting http://console.devcloudwest.inbcu.com
 
-Click on the ''Marketplace'' link:
+Click on the ''Marketplace'' link, and you'll see the same service/plan/description listing in the browser:
 
-image::lab1.png[]
+image::lab2-mp.png[]
 
-and you'll see the same service/plan/description listing in the browser:
 
-image::lab2.png[]
+== SECTION 2: Setup MySQL and Pivotal Cloud Cache Services
 
-== Creating and Binding to a Service Instance
+=== Create Mysql Service Instance
 
-. Let's begin by creating a MySQL service instance.
-From the Apps Manager UI service marketplace, select _MySQL for Pivotal Cloudfoundry_, select the free plan, and provide an instance name.
-In the drop-down list next to _Bind to App_ select your workshop application.
-+
-image::lab3.png[]
+Pizza store app will make service calls to this mysql instance
 
-. Notice the admonition to `Use 'cf restage' to ensure your env variable changes take effect`.
-Let's take a look at the environment variables for our application. We can do this by viewing to the homepage of the application.
-Here we will see a printout of the environment information.  Take note of what is contained in the section _Bound Services_.  It's an empty JSON document!
-
-. Now let's _restage_ the application, which cycles our application back through the staging/buildpack process before redeploying the application.footnote:[In this case, we could accomplish the same goal by only _restarting_ the application via `cf restart spring-music`.
-A _restage_ is generally recommended because Cloud Foundry buildpacks also have access to injected environment variables and can install or configure things differently based on their values.]
-+
 ----
-$ cf restage workshop
-----
-+
-Once the application is running again, revisit or refresh the browser tab where you have the _Wokshop_ application loaded.  You'll notice now we have information that could be used to connect to a DB.
-In fact, our data is now being retrieved from that MySQL database!
-+
-----
-Bound Services:
-{
-   "p-mysql":[
-      {
-         "name":"adam-db",
-         "label":"p-mysql",
-         "tags":[
-            "mysql",
-            "relational"
-         ],
-         "plan":"100mb-dev",
-         "credentials":{
-            "hostname":"10.68.105.55",
-            "port":3306,
-            "name":"cf_226845a3_1982_44ac_92b9_4b149af56bbc",
-            "username":"n67hpBOnKlsPUjKn",
-            "password":"hUa4WSrq2hPtBsuk",
-            "uri":"mysql://n67hpBOnKlsPUjKn:hUa4WSrq2hPtBsuk@10.68.105.55:3306/cf_226845a3_1982_44ac_92b9_4b149af56bbc?reconnect=true",
-            "jdbcUrl":"jdbc:mysql://10.68.105.55:3306/cf_226845a3_1982_44ac_92b9_4b149af56bbc?user=n67hpBOnKlsPUjKn&password=hUa4WSrq2hPtBsuk"
-         }
-      }
-   ]
-}
+cf create-service p.mysql db-small workshop-db
 ----
 
-. You may also verify your service was provisioned in the Apps Manager UI by clicking on your application and selecting the _Services_ tab.
-+
-image::lab4.png[]
-+
-You should now see the service created in step 1 listed.
+=== Create PCC Instance
+Services can be created through Apps Manager Marketplace or by executing cf cli commands
 
-. You may also verify your service was provisioned using the CLI:
-+
+==== Display available PCC plans
+
 ----
-$ cf services
+cf marketplace -s p-cloudcache
 ----
-+
-You should now see the service created in step 1 listed and your application listed as a bound app.
+
+===== Step 1: create a PCC OnDemand service in your org & space
+
+----
+cf create-service p-cloudcache extra-small workshop-pcc
+
+----
+
+===== Step 2: Create service key for retrieving connection information for GFSH cli
+
+----
+cf create-service-key workshop-pcc devkey
+----
+
+===== Step 3: Retrieve url for PCC cli (GFSH) and corresponding credentials 
+
+----
+cf service-key workshop-pcc devkey
+----
+
+===== Step 4: Login into to PCC cli (GFSH)
+
+Replace URL and password with the info retrieved above
+
+----
+connect --use-http=true --url=http://gemfire-xxxx-xxx-xx-xxxx.system.excelsiorcloud.com/gemfire/v1 --user=cluster_operator --password=*******
+----
+
+===== Step 5: create PCC regions
+
+Note: Region name created on PCC server and client should match
+
+----
+create region --name=customer --type=PARTITION_REDUNDANT_PERSISTENT
+create region --name=pizza_orders --type=PARTITION_REDUNDANT_PERSISTENT
+----
+
+== SECTION 3: Deploy the Pizza Store App and bind MySql and PCC Services
+
+=== Deploy the Pizza Store App
+
+Open the manifest.yml file. You will see the following:
+
+----
+applications:
+- name: pizza-store-pcc-client
+  random-route: true
+  path: target/pizza-store-pcc-client-0.0.1-SNAPSHOT.jar
+----
+
+This will app will be deployed with the name pizza-store-pcc-client using target/pizza-store-pcc-client-0.0.1-SNAPSHOT.jar and a random route url.
+
+Let's deploy without starting the app.
+
+----
+cf push --no-start
+----
+
+=== Bind the services to the Pizza Store App
+
+----
+cf bind-service pizza-store-pcc-client workshop-mysql
+cf bind-service pizza-store-pcc-client workshop-pcc
+----
+
+=== Start the Pizza Store App
+
+----
+cf start pizza-store-pcc-client
+----
+
+== SECTION 4: Run the Pizza Store App
+
+=== Setup the database
+
+http://pizza-store-pcc-client.xyz.numerounocloud.com/loaddb?amount=100
+
+----
+New customers successfully saved into Database
+----
+
+http://pizza-store-pcc-client.xyz.numerounocloud.com/showdb
+
+----
+First 10 customers are show here: 
+Customer [id=0FsIMYG30, name=Brody England, email=england@gmail.com, address=59644 New York, birthday=1973-07-16T03:34:20.016Z]
+Customer [id=2afB7G57Z, name=Ella Robbins, email=ella.robbins@mail.com, address=72508 San Francisco, birthday=1942-05-23T20:49:41.209Z]
+Customer [id=2dO6dSUIs, name=Eva Fischer, email=fischer@mail.com, address=66604 New York, birthday=1949-05-29T22:01:01.136Z]
+Customer [id=2mDAi0qRr, name=Gianna Merritt, email=merritt@yahoo.com, address=25734 Washington, birthday=1969-01-20T14:08:36.941Z]
+....
+----
+
+=== Pizza Store APIs
+
+http://pizza-store-pcc-client.xyz.numerounocloud.com/pizzas
+
+----
+Lets Order Some Pizza 
+-------------------------------
+types: plain, fancy
+
+GET /orderPizza?email={emailId}&type={pizzaType} - Order a pizza 
+GET /orders?email={emailId} - get specific value 
+
+----
+
+http://pizza-store-pcc-client.xyz.numerounocloud.com/orderPizza?email=lucynorton@gmail.com&type=fancy
+
+==== Result
+
+Cache Miss Scenario
+
+----
+Result [Pizza{name='fancy', toppings=[arugula, chicken], sauce='pesto', Customer='Customer [id=05eKpgOFA, name=Lucy Norton, email=lucynorton@gmail.com, address=48665 Washington, birthday=1965-02-10T06:20:27.828Z]'}] 
+Cache Miss for Customer [true] 
+Read from [MYSQL] 
+Elapsed Time [234 ms]
+----
+
+Data Returned From Cache 
+
+----
+Result [Pizza{name='fancy', toppings=[arugula, chicken], sauce='pesto', Customer='Customer [id=05eKpgOFA, name=Lucy Norton, email=lucynorton@gmail.com, address=48665 Washington, birthday=1965-02-10T06:20:27.828Z]'}] 
+Cache Miss for Customer [false] 
+Read from [PCC] 
+Elapsed Time [2 ms]
+----

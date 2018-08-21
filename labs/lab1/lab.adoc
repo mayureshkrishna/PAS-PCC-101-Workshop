@@ -23,7 +23,7 @@ Follow the prompts
 . Change to the _cf-spring-mvc-boot_ sample application directory:
 +
 ----
-$ cd $BOOTCAMP_HOME/cf-spring-mvc-boot
+$ cd ../../cf-spring-mvc-boot
 ----
 
 . Push the application!
@@ -36,33 +36,70 @@ You should see output similar to the following listing. Take a look at the listi
 +
 ====
 ----
-Using manifest file /Users/phopper/workspace/NBCU-PCF-Workshop-101/cf-spring-mvc-boot/manifest.yml <1>
+Using manifest file /Data/Customer/INCOMM/PAS-PCC-101-Workshop/cf-spring-mvc-boot/manifest.yml
 
-Creating app workshop in org TELCO / space hopper as phopper@pivotal.io...
-OK <2>
+Updating app workshop in org pivot-makrishna / space development as makrishna@pivotal.io...
+OK
 
-Creating route workshop-philologic-catchpolery.vert.fe.gopivotal.com...
-OK <3>
+Creating route workshop-mkrishna-dev.pcfbeta.io...
+OK
 
-Binding workshop-philologic-catchpolery.vert.fe.gopivotal.com to workshop...
-OK <4>
+Binding workshop-mkrishna-dev.pcfbeta.io to workshop...
+OK
 
-Uploading workshop... <5>
-Uploading app files from: /Users/phopper/workspace/NBCU-PCF-Workshop-101/cf-spring-mvc-boot/target/cf-spring-mvc-boot-0.0.1-SNAPSHOT.jar
-Uploading 10.6M, 153 files
+Uploading workshop...
+Uploading app files from: /var/folders/zk/nhxp0hlj21j3f3fsg7lkt8xh0000gn/T/unzipped-app744299864
+Uploading 843.4K, 146 files
 Done uploading               
 OK
 
-Starting app workshop in org TELCO / space hopper as phopper@pivotal.io... <6>
------> Downloaded app package (27M)
------> Java Buildpack Version: v3.1.1 (offline) | https://github.com/cloudfoundry/java-buildpack#7a538fb
------> Downloading Open Jdk JRE 1.8.0_51 from https://download.run.pivotal.io/openjdk/trusty/x86_64/openjdk-1.8.0_51.tar.gz (found in cache)
-       Expanding Open Jdk JRE to .java-buildpack/open_jdk_jre (1.5s) <7>
------> Downloading Open JDK Like Memory Calculator 1.1.1_RELEASE from https://download.run.pivotal.io/memory-calculator/trusty/x86_64/memory-calculator-1.1.1_RELEASE (found in cache)
-       Memory Settings: -Xss995K -Xmx382293K -Xms382293K -XX:MaxMetaspaceSize=64M -XX:MetaspaceSize=64M
------> Downloading Spring Auto Reconfiguration 1.7.0_RELEASE from https://download.run.pivotal.io/auto-reconfiguration/auto-reconfiguration-1.7.0_RELEASE.jar (found in cache)
-
------> Uploading droplet (72M) <8>
+Starting app workshop in org pivot-makrishna / space development as makrishna@pivotal.io...
+Downloading nodejs_buildpack...
+Downloading php_buildpack...
+Downloading python_buildpack...
+Downloading go_buildpack...
+Downloading meta_buildpack...
+Downloaded meta_buildpack (9.5K)
+Downloading dotnet_core_buildpack...
+Downloaded nodejs_buildpack (134.9M)
+Downloading staticfile_buildpack...
+Downloaded staticfile_buildpack (6.8M)
+Downloading hwc_buildpack...
+Downloaded hwc_buildpack (8.2M)
+Downloading binary_buildpack...
+Downloaded binary_buildpack (3.5M)
+Downloading java_buildpack_offline...
+Downloaded python_buildpack (466.7M)
+Downloading ruby_buildpack...
+Downloaded java_buildpack_offline (361.8M)
+Downloaded dotnet_core_buildpack (955.1M)
+Downloaded go_buildpack (783.8M)
+Downloaded php_buildpack (567.6M)
+Downloaded ruby_buildpack (339.4M)
+Cell dd91c9ac-3a04-4058-8822-968a6c73edf6 creating container for instance cec6c99d-17e7-4dae-87bb-6233595c35ec
+Cell dd91c9ac-3a04-4058-8822-968a6c73edf6 successfully created container for instance cec6c99d-17e7-4dae-87bb-6233595c35ec
+Downloading app package...
+Downloaded app package (26.7M)
+-----> Java Buildpack v4.13.1 (offline) | https://github.com/cloudfoundry/java-buildpack.git#4644847
+-----> Downloading Jvmkill Agent 1.16.0_RELEASE from https://java-buildpack.cloudfoundry.org/jvmkill/trusty/x86_64/jvmkill-1.16.0_RELEASE.so (found in cache)
+-----> Downloading Open Jdk JRE 1.8.0_181 from https://java-buildpack.cloudfoundry.org/openjdk/trusty/x86_64/openjdk-1.8.0_181.tar.gz (found in cache)
+       Expanding Open Jdk JRE to .java-buildpack/open_jdk_jre (1.2s)
+       JVM DNS caching disabled in lieu of BOSH DNS caching
+-----> Downloading Open JDK Like Memory Calculator 3.13.0_RELEASE from https://java-buildpack.cloudfoundry.org/memory-calculator/trusty/x86_64/memory-calculator-3.13.0_RELEASE.tar.gz (found in cache)
+       Loaded Classes: 16168, Threads: 250
+-----> Downloading Client Certificate Mapper 1.6.0_RELEASE from https://java-buildpack.cloudfoundry.org/client-certificate-mapper/client-certificate-mapper-1.6.0_RELEASE.jar (found in cache)
+-----> Downloading Container Security Provider 1.14.0_RELEASE from https://java-buildpack.cloudfoundry.org/container-security-provider/container-security-provider-1.14.0_RELEASE.jar (found in cache)
+-----> Downloading Spring Auto Reconfiguration 2.4.0_RELEASE from https://java-buildpack.cloudfoundry.org/auto-reconfiguration/auto-reconfiguration-2.4.0_RELEASE.jar (found in cache)
+Exit status 0
+Uploading droplet, build artifacts cache...
+Uploading build artifacts cache...
+Uploading droplet...
+Uploaded build artifacts cache (132B)
+Uploaded droplet (72.8M)
+Uploading complete
+Cell dd91c9ac-3a04-4058-8822-968a6c73edf6 stopping instance cec6c99d-17e7-4dae-87bb-6233595c35ec
+Cell dd91c9ac-3a04-4058-8822-968a6c73edf6 destroying container for instance cec6c99d-17e7-4dae-87bb-6233595c35ec
+Cell dd91c9ac-3a04-4058-8822-968a6c73edf6 successfully destroyed container for instance cec6c99d-17e7-4dae-87bb-6233595c35ec
 
 0 of 1 instances running, 1 starting
 0 of 1 instances running, 1 starting
@@ -70,39 +107,26 @@ Starting app workshop in org TELCO / space hopper as phopper@pivotal.io... <6>
 
 App started
 
+
 OK
 
-App workshop was started using this command `CALCULATED_MEMORY=$($PWD/.java-buildpack/open_jdk_jre/bin/java-buildpack-memory-calculator-1.1.1_RELEASE -memorySizes=metaspace:64m.. -memoryWeights=heap:75,metaspace:10,stack:5,native:10 -totMemory=$MEMORY_LIMIT) && SERVER_PORT=$PORT $PWD/.java-buildpack/open_jdk_jre/bin/java -cp $PWD/.:$PWD/.java-buildpack/spring_auto_reconfiguration/spring_auto_reconfiguration-1.7.0_RELEASE.jar -Djava.io.tmpdir=$TMPDIR -XX:OnOutOfMemoryError=$PWD/.java-buildpack/open_jdk_jre/bin/killjava.sh $CALCULATED_MEMORY -Djava.security.egd=file:///dev/urandom org.springframework.boot.loader.JarLauncher` <9>
+App workshop was started using this command `JAVA_OPTS="-agentpath:$PWD/.java-buildpack/open_jdk_jre/bin/jvmkill-1.16.0_RELEASE=printHeapHistogram=1 -Djava.io.tmpdir=$TMPDIR -Djava.ext.dirs=$PWD/.java-buildpack/container_security_provider:$PWD/.java-buildpack/open_jdk_jre/lib/ext -Djava.security.properties=$PWD/.java-buildpack/java_security/java.security $JAVA_OPTS" && CALCULATED_MEMORY=$($PWD/.java-buildpack/open_jdk_jre/bin/java-buildpack-memory-calculator-3.13.0_RELEASE -totMemory=$MEMORY_LIMIT -loadedClasses=16877 -poolType=metaspace -stackThreads=250 -vmOptions="$JAVA_OPTS") && echo JVM Memory Configuration: $CALCULATED_MEMORY && JAVA_OPTS="$JAVA_OPTS $CALCULATED_MEMORY" && MALLOC_ARENA_MAX=2 SERVER_PORT=$PORT eval exec $PWD/.java-buildpack/open_jdk_jre/bin/java $JAVA_OPTS -cp $PWD/. org.springframework.boot.loader.JarLauncher`
 
-Showing health and status for app workshop in org TELCO / space hopper as phopper@pivotal.io... <10>
+Showing health and status for app workshop in org pivot-makrishna / space development as makrishna@pivotal.io...
 OK
 
 requested state: started
 instances: 1/1
-usage: 512M x 1 instances
-urls: workshop-philologic-catchpolery.vert.fe.gopivotal.com
-last uploaded: Thu Sep 24 20:15:27 UTC 2015
+usage: 1G x 1 instances
+urls: workshop-mkrishna-dev.pcfbeta.io
+last uploaded: Tue Aug 21 01:08:04 UTC 2018
 stack: cflinuxfs2
-buildpack: java-buildpack=v3.1.1-offline-https://github.com/cloudfoundry/java-buildpack#7a538fb java-main java-opts open-jdk-like-jre=1.8.0_51 open-jdk-like-memory-calculator=1.1.1_RELEASE spring-auto-reconfiguration=1.7.0_RELEASE
+buildpack: client-certificate-mapper=1.6.0_RELEASE container-security-provider=1.14.0_RELEASE java-buildpack=v4.13.1-offline-https://github.com/cloudfoundry/java-buildpack.git#4644847 java-main java-opts java-security jvmkill-agent=1.16.0_RELEASE open-jd...
 
-     state     since                    cpu    memory           disk           details   
-#0   running   2015-09-24 02:16:11 PM   2.4%   392.6M of 512M   151.6M of 1G 
+     state     since                    cpu    memory         disk           details
+#0   running   2018-08-20 09:10:51 PM   0.0%   276.4M of 1G   155.2M of 1G
 ----
-<1> The CLI is using a manifest to provide necessary configuration details such as application name, memory to be allocated, and path to the application artifact.
-Take a look at `manifest.yml` to see how.
-<2> In most cases, the CLI indicates each Cloud Foundry API call as it happens.
-In this case, the CLI has created an application record for _Workshop_ in your assigned space.
-<3> All HTTP/HTTPS requests to applications will flow through Cloud Foundry's front-end router called http://docs.cloudfoundry.org/concepts/architecture/router.html[(Go)Router].
-Here the CLI is creating a route with random word tokens inserted (again, see `manifest.yml` for a hint!) to prevent route collisions across the default `devcloudwest.inbcu.com` domain.
-<4> Now the CLI is _binding_ the created route to the application.
-Routes can actually be bound to multiple applications to support techniques such as http://www.mattstine.com/2013/07/10/blue-green-deployments-on-cloudfoundry[blue-green deployments].
-<5> The CLI finally uploads the application bits to Pivotal Cloudfoundry. Notice that it's uploading _75 files_! This is because Cloud Foundry actually explodes a ZIP artifact before uploading it for caching purposes.
-<6> Now we begin the staging process. The https://github.com/cloudfoundry/java-buildpack[Java Buildpack] is responsible for assembling the runtime components necessary to run the application.
-<7> Here we see the version of the JRE that has been chosen and installed.
-<8> The complete package of your application and all of its necessary runtime components is called a _droplet_.
-Here the droplet is being uploaded to Pivotal Cloudfoundry's internal blobstore so that it can be easily copied to one or more _http://docs.cloudfoundry.org/concepts/architecture/execution-agent.html[Droplet Execution Agents (DEA's)]_ for execution.
-<9> The CLI tells you exactly what command and argument set was used to start your application.
-<10> Finally the CLI reports the current status of your application's health.
+
 ====
 
 . Visit the application in your browser by hitting the route that was generated by the CLI:
@@ -122,17 +146,17 @@ Note the application name for next steps
 . Get information about running instances, memory, CPU, and other statistics using CLI instances command
 +
 ----
-$ cf app <<app_name>>
+$ cf app workshop
 ----
 
 . Stop the deployed application using the CLI
 +
 ----
-$ cf stop <<app_name>>
+$ cf stop workshop
 ----
 
 . Delete the deployed application using the CLI
 +
 ----
-$ cf delete <<app_name>>
+$ cf delete workshop
 ----
