@@ -22,7 +22,8 @@ This one day hands-on classroom style session will provide developers with hands
 2:45 PM - 3:00 PM:: Break
 3:00 PM - 3:30 PM:: 
 * Session 3: _Pivotal Cloud Foundry Security_
-3:30 PM - 4:00 PM:: Demo - Spring Boot with Camel and Spring XML DSL on Pivotal Cloud Foundry
+3:30 PM - 4:00 PM::
+* Session 4: _Pivotal Cloud Foundry - Apigee_
 4:00 PM - 4:15 PM:: Wrap Up
 
 == Course Materials

@@ -134,7 +134,7 @@ cf push --no-start
 === Bind the services to the Pizza Store App
 
 ----
-cf bind-service pizza-store-pcc-client workshop-mysql
+cf bind-service pizza-store-pcc-client workshop-db
 cf bind-service pizza-store-pcc-client workshop-pcc
 ----
 
@@ -150,7 +150,7 @@ cf start pizza-store-pcc-client
 
 Let's load the db using /load endpoint. Make sure to use your route URL
 
-http://pizza-store-pcc-client.xyz.pivotal.io/loaddb?amount=100
+https://pizza-store-pcc-client-boring-crane.cfapps.haas-69.pez.pivotal.io/loaddb?amount=100
 
 ----
 New customers successfully saved into Database
@@ -158,7 +158,7 @@ New customers successfully saved into Database
 
 Let's fetch top 10 customers using /showdb endpoint. Make sure to use your route URL
 
-http://pizza-store-pcc-client.xyz.pivotal.io/showdb
+https://pizza-store-pcc-client-boring-crane.cfapps.haas-69.pez.pivotal.io/showdb
 
 ----
 First 10 customers are show here: 
@@ -173,7 +173,7 @@ Customer [id=2mDAi0qRr, name=Gianna Merritt, email=merritt@yahoo.com, address=25
 
 Lets look at the APIs available for our pizza store app using /pizzas endpoint.
 
-http://pizza-store-pcc-client.xyz.pivotal.io/pizzas
+https://pizza-store-pcc-client-boring-crane.cfapps.haas-69.pez.pivotal.io/pizzas
 
 ----
 Lets Order Some Pizza 
@@ -187,7 +187,7 @@ GET /orders?email={emailId} - get specific value
 
 Now we can order some pizza by invoking /orderPizza endpoint. Make sure to use your route URL and pick an email address from data returned by /showdb endpoint.
 
-http://pizza-store-pcc-client.xyz.pivotal.io/orderPizza?email=fischer@mail.com&type=fancy
+https://pizza-store-pcc-client-boring-crane.cfapps.haas-69.pez.pivotal.io/orderPizza?email=fischer@mail.com&type=fancy
 
 ==== Result
 
@@ -206,7 +206,7 @@ Data Returned From Cache
 
 Invoke that endpoint again, and this time data will be pulled from Cache and it will return much faster.
 
-http://pizza-store-pcc-client.xyz.pivotal.io/orderPizza?email=fischer@mail.com&type=fancy
+https://pizza-store-pcc-client-boring-crane.cfapps.haas-69.pez.pivotal.io/orderPizza?email=fischer@mail.com&type=fancy
 
 
 ----
@@ -230,7 +230,7 @@ If you look at the code under io.pivotal.data.repo.PizzaOrderRepo, we are using 
 
 Now lets fetch the order status
 
-http://pizza-store-pcc-client.xyz.pivotal.io/orders?email=nathan.mendez@mail.com
+https://pizza-store-pcc-client-boring-crane.cfapps.haas-69.pez.pivotal.io/orders?email=nathan.mendez@mail.com
 
 It will use the index and fetch data from Cache
 
